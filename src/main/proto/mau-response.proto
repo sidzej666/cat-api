@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package mauService;
+
+option java_package = "com.catAndDogStudio.catService";
+option java_outer_classname = "CatServiceResponse";
+
+enum ResponseType {
+    MAU_RESPONSE = 0;
+    GIVE_FOOD_RESPONSE = 1;
+    SERVER_MESSAGE = 2;
+}
+
+message Response {
+    ResponseType type = 1;
+    MauResponse mauResponse = 2;
+    GiveFoodResponse giveFoodResponse = 3;
+    CatServerMessage catServerMessage = 4;
+}
+
+message MauResponse {
+    string catName = 1;
+    string mau = 2;
+}
+
+message GiveFoodResponse {
+    string foodName = 1;
+    bool foodForCat = 2;
+}
+
+message CatServerMessage {
+    string message = 1;
+}

@@ -1,0 +1,48 @@
+plugins {
+    id 'java'
+    id "com.google.protobuf" version "0.8.8"
+    id 'maven'
+}
+
+group 'catAndDogStudio'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+dependencies {
+
+    compileOnly group: 'io.grpc', name: 'grpc-all', version: '1.19.0'
+    compileOnly "com.google.protobuf:protobuf-java:3.10.0"
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    main {
+        proto {
+            srcDir 'src/main/proto'
+        }
+        java {
+            // include self written and generated code
+            srcDirs 'src/main/java', 'generated-sources/main/java'
+        }
+    }
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.7.0"
+    }
+    plugins {
+        grpc {
+            artifact = "io.grpc:protoc-gen-grpc-java:1.19.0"
+        }
+    }
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {}
+        }
+    }
+}

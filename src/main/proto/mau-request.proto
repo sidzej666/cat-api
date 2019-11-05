@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package mauService;
+
+option java_package = "com.catAndDogStudio.catService";
+option java_outer_classname = "CatServiceRequest";
+
+enum RequestType {
+    MAU = 0;
+    GIVE_FOOD = 1;
+}
+
+message Request {
+    RequestType type = 1;
+    Mau mau = 2;
+    GiveFood giveFood = 3;
+}
+
+message Mau {
+    string catId = 1;
+    string mau = 2;
+
+    enum CatMood {
+        CUTE_CAT = 0;
+        ANGRY_CAT = 1;
+        HUNGRY_CAT = 2;
+        SLEEPY_CAT = 3;
+    }
+
+    CatMood mood = 3;
+}
+
+message GiveFood {
+    string foodName = 1;
+}
